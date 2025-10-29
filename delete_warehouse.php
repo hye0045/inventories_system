@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
   require_once('includes/load.php');
   page_require_level(1);
@@ -15,4 +16,23 @@
       $session->msg("d","Lỗi: Không thể xóa kho hàng.");
       redirect('warehouses.php');
   }
+=======
+<?php
+  require_once('includes/load.php');
+  page_require_level(1);
+
+  $warehouse = find_warehouse_by_id((int)$_GET['id']);
+  if(!$warehouse){
+    $session->msg("d","Không tìm thấy ID kho hàng.");
+    redirect('warehouses.php');
+  }
+
+  if(delete_by_id('warehouses', (int)$warehouse['id'])){
+      $session->msg("s","Xóa kho hàng thành công.");
+      redirect('warehouses.php');
+  } else {
+      $session->msg("d","Lỗi: Không thể xóa kho hàng.");
+      redirect('warehouses.php');
+  }
+>>>>>>> 3f20b3f81f4dcf803adb80cb641f0d131bee66e6
 ?>
