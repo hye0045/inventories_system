@@ -139,9 +139,7 @@ function delete_product_by_id(int $product_id):bool{
   $sql="DELETE FROM products WHERE id=?";
   try{
     //call function query
-    $stmt=$db->query($sql,[$product_id]);
-    //return true if find result
-    return $stmt->affected_rows===1;
+    return $db->query($sql,[$product_id]);
   }catch(Exception $e){ 
     return false;
   }

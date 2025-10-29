@@ -16,46 +16,48 @@
    </ul>
   </li>
   <li>
-    <a href="categorie.php" >
-      <i class="glyphicon glyphicon-indent-left"></i>
-      <span>Categories</span>
-    </a>
-  </li>
+  <a href="#" class="submenu-toggle">
+    <i class="glyphicon glyphicon-th-large"></i>
+    <span>Categories</span>
+  </a>
+  <ul class="nav submenu">
+    <li><a href="product.php">Products&Raw</a></li>
+    <li><a href="categories.php">Category</a></li>
+    <li><a href="warehouses.php">Warehouses</a></li>
+    <li><a href="location.php">Location</a></li>
+    <li><a href="suppliers.php">Suppliers</a></li>
+ </ul>
+</li>
   <li>
     <a href="#" class="submenu-toggle">
-      <i class="glyphicon glyphicon-th-large"></i>
-      <span>Products</span>
+      <i class="glyphicon glyphicon-log-in"></i>
+      <span>Stock In</span>
     </a>
     <ul class="nav submenu">
-       <li><a href="product.php">Manage products</a> </li>
-       <li><a href="add_product.php">Add product</a> </li>
-   </ul>
+      <li><a href="stockin_finished.php">Finished Goods Inbound</a></li>
+      <li><a href="stockin_materials.php">Raw Materials Inbound</a></li>
+    </ul>
   </li>
   <li>
-    <a href="media.php" >
-      <i class="glyphicon glyphicon-picture"></i>
-      <span>Meadias</span>
+    <a href="#" class="submenu-toggle">
+      <i class="glyphicon glyphicon-log-out"></i>
+      <span>Stock Out</span>
+    </a>
+    <ul class="nav submenu">
+      <li><a href="stockout_finished.php">Finished Goods Outbound</a></li>
+      <li><a href="stockout_materials.php">Raw Materials Outbound</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="stocktakes.php" >
+      <i class="glyphicon glyphicon-tasks"></i>
+      <span>Stocktake</span>
     </a>
   </li>
   <li>
-    <a href="#" class="submenu-toggle">
-      <i class="glyphicon glyphicon-th-list"></i>
-       <span>Sales</span>
-      </a>
-      <ul class="nav submenu">
-         <li><a href="sales.php">Manage Sales</a> </li>
-         <li><a href="add_sale.php">Add Sale</a> </li>
-     </ul>
-  </li>
-  <li>
-    <a href="#" class="submenu-toggle">
+    <a href="report_select.php" class="submenu-toggle">
       <i class="glyphicon glyphicon-signal"></i>
-       <span>Sales Report</span>
+       <span>Inventory report</span>
       </a>
-      <ul class="nav submenu">
-        <li><a href="sales_report.php">Sales by dates </a></li>
-        <li><a href="monthly_sales.php">Monthly sales</a></li>
-        <li><a href="daily_sales.php">Daily sales</a> </li>
-      </ul>
   </li>
 </ul>

@@ -1,7 +1,6 @@
 <?php
   $page_title = 'All Group';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
    page_require_level(1);
   $all_groups = find_all('user_groups');
 ?>
@@ -41,7 +40,7 @@
              <?php echo remove_junk(ucwords($a_group['group_level']))?>
            </td>
            <td class="text-center">
-           <?php if($a_group['group_status'] === '1'): ?>
+           <?php if($a_group['group_status'] == '1'): ?>
             <span class="label label-success"><?php echo "Active"; ?></span>
           <?php else: ?>
             <span class="label label-danger"><?php echo "Deactive"; ?></span>

@@ -6,7 +6,6 @@
 <?php
 //update user image
   if(isset($_POST['submit'])) {
-  $photo = new Media();
   $user_id = (int)$_POST['user_id'];
   $photo->upload($_FILES['file_upload']);
   if($photo->process_user($user_id)){

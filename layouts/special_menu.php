@@ -6,9 +6,22 @@
     </a>
   </li>
   <li>
-    <a href="categorie.php" >
-      <i class="glyphicon glyphicon-indent-left"></i>
-      <span>Categorie</span>
+  <a href="#" class="submenu-toggle">
+    <i class="glyphicon glyphicon-th-large"></i>
+    <span>Categories</span>
+  </a>
+  <ul class="nav submenu">
+    <li><a href="product.php">Products&Raw</a></li>
+    <li><a href="categories.php">Category</a></li>
+    <li><a href="warehouses.php">Warehouses</a></li>
+    <li><a href="location.php">Location</a></li>
+    <li><a href="suppliers.php">Suppliers</a></li>
+ </ul>
+</li>
+  <li>
+    <a href="add_stocktake.php" >
+      <i class="glyphicon glyphicon-tasks"></i>
+      <span>Stocktake</span>
     </a>
   </li>
   <li>

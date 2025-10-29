@@ -1,6 +1,5 @@
 <?php
-require_once(LIB_PATH_INC.DS."config.php");
-
+require_once(__DIR__ . '/config.php');
 class Database {
     private ?mysqli $connection = null;
 
@@ -20,38 +19,70 @@ class Database {
     }
 
     /**
-     * Thực thi câu lệnh SQL an toàn bằng Prepared Statements.
+     * Thực thi các câu lệnh thay đổi dữ liệu (INSERT, UPDATE, DELETE).
+     * Trả về TRUE nếu có ít nhất 1 dòng bị ảnh hưởng, ngược lại trả về FALSE.
      */
-    public function query(string $sql, array $params = []): mysqli_stmt {
+    public function query(string $sql, array $params = []): bool {
         $this->connect();
         $stmt = $this->connection->prepare($sql);
         if ($stmt === false) {
             throw new Exception("SQL prepare statement failed: " . $this->connection->error);
         }
         if (!empty($params)) {
-            $types = str_repeat('s', count($params)); // Mặc định là string, an toàn nhất
+            $types = str_repeat('s', count($params)); 
             $stmt->bind_param($types, ...$params);
         }
         $stmt->execute();
-        return $stmt;
+        
+        // Lấy số dòng bị ảnh hưởng từ statement và trả về true/false
+        $affected_rows = $stmt->affected_rows;
+        $stmt->close();
+        
+        return $affected_rows > 0;
     }
 
     /**
-     * Tiện ích: Lấy tất cả các dòng kết quả.
+     * Tiện ích: Lấy tất cả các dòng kết quả từ câu lệnh SELECT.
      */
     public function fetchAll(string $sql, array $params = []): array {
-        $stmt = $this->query($sql, $params);
+        $this->connect();
+        $stmt = $this->connection->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("SQL prepare statement failed: " . $this->connection->error);
+        }
+        if (!empty($params)) {
+            $types = str_repeat('s', count($params));
+            $stmt->bind_param($types, ...$params);
+        }
+        $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $data;
     }
 
     /**
-     * Tiện ích: Lấy một dòng kết quả.
+     * Tiện ích: Lấy một dòng kết quả từ câu lệnh SELECT.
      */
     public function fetchOne(string $sql, array $params = []): ?array {
-        $stmt = $this->query($sql, $params);
+        $this->connect();
+        $stmt = $this->connection->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("SQL prepare statement failed: " . $this->connection->error);
+        }
+        if (!empty($params)) {
+            $types = str_repeat('s', count($params));
+            $stmt->bind_param($types, ...$params);
+        }
+        $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_assoc();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        return $row ?: null;
+    }
+    public function escape(string $str): string {
+        $this->connect(); // Đảm bảo đã kết nối CSDL
+        return $this->connection->real_escape_string($str);
     }
 
     /**
@@ -68,11 +99,11 @@ class Database {
     }
     
     public function commit(): void {
-        $this->connection->commit();
+        if ($this->connection) $this->connection->commit();
     }
 
     public function rollback(): void {
-        $this->connection->rollback();
+        if ($this->connection) $this->connection->rollback();
     }
 
     public function disconnect(): void {

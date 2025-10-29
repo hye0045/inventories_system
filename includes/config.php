@@ -1,8 +1,8 @@
 <?php
-
-  define( 'DB_HOST', 'localhost' );          // Set database host
-  define( 'DB_USER', 'root' );             // Set database user
-  define( 'DB_PASS', '' );             // Set database password
-  define( 'DB_NAME', 'coffee_inventory' );        // Set database name
-
+  ini_set('display_errors', 1);
+  define( 'DB_HOST', 'localhost' );       
+  define( 'DB_USER', 'root' );            
+  define( 'DB_PASS', '' );               
+  define( 'DB_NAME', 'coffee_inventories' );       
 ?>
+
